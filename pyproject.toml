@@ -1,0 +1,21 @@
+[project]
+name = "wallet-api"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "adrlksv",email = "Qwerty123Andrey@bk.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[all] (>=0.119.0,<0.120.0)",
+    "asyncpg (>=0.30.0,<0.31.0)",
+    "sqlalchemy (>=2.0.44,<3.0.0)",
+    "pydantic-settings (>=2.11.0,<3.0.0)",
+    "orjson (>=3.11.3,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
