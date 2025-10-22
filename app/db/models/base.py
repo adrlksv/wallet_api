@@ -5,7 +5,7 @@ from sqlalchemy.orm import (
 from sqlalchemy import MetaData
 
 from app.utils.case_converter import camel_case_to_snake_case
-from core.config import settings
+from app.core.config import settings
 
 
 class Base(DeclarativeBase):

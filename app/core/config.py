@@ -1,6 +1,5 @@
 from pydantic import (
     BaseModel,
-    PostgresDsn,
 )
 from pydantic_settings import (
     BaseSettings,
@@ -24,7 +23,12 @@ class ApiPrefix(BaseModel):
 
 
 class DatabaseConfig(BaseModel):
-    url: PostgresDsn
+    scheme: str = "postgresql+asyncpg"
+    host: str
+    port: int
+    user: str
+    password: str
+    name: str
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
@@ -38,6 +42,10 @@ class DatabaseConfig(BaseModel):
         "pk": "pk_%(table_name)s",
     }
 
+    @property
+    def url(self) -> str:
+        return f"{self.scheme}://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -45,6 +53,7 @@ class Settings(BaseSettings):
         case_sensitive=False,
         env_nested_delimiter="__",
         env_prefix="APP_CONFIG__",
+        extra="ignore",
     )
     run: RunConfig = RunConfig()
     db: DatabaseConfig

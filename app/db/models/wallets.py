@@ -8,9 +8,12 @@ from sqlalchemy import (
     DECIMAL,
     DateTime,
     func,
+    text,
 )
 
 from decimal import Decimal
+
+import uuid
 
 from app.db.models.base import Base
 
@@ -20,6 +23,8 @@ class Wallet(Base):
         UUID,
         primary_key=True,
         nullable=False,
+        default=uuid.uuid4,
+        server_default=text("gen_random_uuid()"),
     )
     balance: Mapped[Decimal] = mapped_column(
         DECIMAL,

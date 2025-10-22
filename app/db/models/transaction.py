@@ -12,6 +12,8 @@ from sqlalchemy import (
     func,
 )
 
+import uuid
+
 from decimal import Decimal
 
 from app.db.models.base import Base
@@ -22,6 +24,7 @@ class Transaction(Base):
         UUID,
         primary_key=True,
         nullable=False,
+        default=uuid.uuid4,
     )
     type: Mapped[str] = mapped_column(
         String,

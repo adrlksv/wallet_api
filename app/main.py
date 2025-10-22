@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 
 from app.db.db_helper import db_helper
 from app.core.config import settings
+from app.api.api_v1.routers.wallet import router as wallet_router
 
 
 @asynccontextmanager
@@ -23,6 +24,8 @@ def create_app() -> FastAPI:
         default_response_class=ORJSONResponse,
         lifespan=lifespan,
     )
+    
+    app.include_router(wallet_router)
     
     return app
 
