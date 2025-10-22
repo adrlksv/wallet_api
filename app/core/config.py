@@ -58,6 +58,11 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     db: DatabaseConfig
     api: ApiPrefix = ApiPrefix()
+    test_db_name: str = "wallet_db_test"
+    
+    @property
+    def test_db_url(self) -> str:
+        return f"{self.db.scheme}://{self.db.user}:{self.db.password}@{self.db.host}:{self.db.port}/{self.test_db_name}"
     
     
 settings = Settings()
